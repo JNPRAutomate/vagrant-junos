@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'A Vagrant plugin for Junos guests, e.g. Firefly Perimeter'
   spec.description   = 'A Vagrant plugin for Junos guests, e.g. Firefly Perimeter'
   spec.homepage      = 'https://github.com/JNPRAutomate/vagrant-junos'
-  spec.license       = 'MIT'
+  spec.license       = 'Apache-2.0'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
