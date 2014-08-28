@@ -5,7 +5,7 @@ require 'vagrant/junos/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'vagrant-junos'
-  spec.version       = VagrantPlugin::Junos::VERSION
+  spec.version       = Vagrant::Junos::VERSION
   spec.authors       = ['John Deatherage']
   spec.email         = ['jdeatherage@juniper.net']
   spec.summary       = 'A Vagrant plugin for Junos guests, e.g. Firefly Perimeter'

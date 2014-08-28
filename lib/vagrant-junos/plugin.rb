@@ -1,9 +1,8 @@
-require "vagrant/junos/version"
 
 require 'vagrant'
 
 module VagrantPlugins
-  module Junos
+  module GuestJunos
     class Plugin < Vagrant.plugin('2')
       name 'Junos guest'
       description 'Junos guest support.'

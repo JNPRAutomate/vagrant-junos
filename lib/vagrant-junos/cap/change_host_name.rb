@@ -1,4 +1,4 @@
-module VagrantPlugins
+module Vagrant
   module Junos
     module Cap
       class ChangeHostName
