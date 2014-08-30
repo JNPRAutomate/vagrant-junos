@@ -1,11 +1,24 @@
+begin
+  require 'vagrant'
+rescue LoadError
+  raise 'The Vagrant Junos plugin must be run within Vagrant'
+end
 
-require 'vagrant'
+# This is a sanity check to make sure no one is attempting to install
+# this into an early Vagrant version.
+if Vagrant::VERSION < '1.2.0'
+  raise 'The Vagrant Junos plugin is only compatible with Vagrant 1.2+'
+end
 
 module VagrantPlugins
-  module GuestJunos
+  module Junos
+    # plugin to support Junos guests
     class Plugin < Vagrant.plugin('2')
-      name 'Junos guest'
-      description 'Junos guest support.'
+      name 'Junos'
+      description <<-DESC
+      This plugin installs a provider that allows Vagrant to manage
+      Junos VMs, such as Firefly Perimeter
+      DESC
 
       guest('junos')  do
         require File.expand_path('../guest', __FILE__)
