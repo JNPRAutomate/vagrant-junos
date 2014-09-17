@@ -6,21 +6,21 @@ end
 
 # This is a sanity check to make sure no one is attempting to install
 # this into an early Vagrant version.
-if Vagrant::VERSION < '1.2.0'
-  raise 'The Vagrant Junos plugin is only compatible with Vagrant 1.2+'
+if Vagrant::VERSION < '1.6.0'
+  fail 'The Vagrant Junos plugin is only compatible with Vagrant 1.6+'
 end
 
 module VagrantPlugins
-  module Junos
+  module GuestJunos
     # plugin to support Junos guests
     class Plugin < Vagrant.plugin('2')
-      name 'Junos'
+      name 'Junos guest'
       description <<-DESC
       This plugin installs a provider that allows Vagrant to manage
       Junos VMs, such as Firefly Perimeter
       DESC
 
-      guest('junos')  do
+      guest('junos') do
         require File.expand_path('../guest', __FILE__)
         Guest
       end

@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'vagrant/junos/version'
+require 'vagrant-junos/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'vagrant-junos'
-  spec.version       = Vagrant::Junos::VERSION
+  spec.version       = VagrantPlugins::GuestJunos::VERSION
   spec.authors       = ['John Deatherage']
   spec.email         = ['jdeatherage@juniper.net']
   spec.summary       = 'A Vagrant plugin for Junos guests, e.g. Firefly Perimeter'

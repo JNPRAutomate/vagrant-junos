@@ -1,13 +1,17 @@
 module Vagrant
-  module Junos
+  module GuestJunos
     module Cap
       # host name change capability - needs to be Junos-aware
       class ChangeHostName
         def self.change_host_name(machine, name)
-          unless machine.communicate.test("hostname | grep '^#{name}$'", shell: 'sh')
-            # replace hostname in local script
-            # apply with netconf
-            # will later be replaced with machine.communicate.netconf commands
+          machine.communicate.tap do |comm|
+            unless comm.test("hostname | grep '^#{name}$'")
+              comm.tap('cli')
+              comm.tap('conf')
+              comm.tap("set system host-name #{name.split('.')[0]}")
+              comm.tap('commit and-quit')
+              comm.tap('exit')
+            end
           end
         end
       end

@@ -9,8 +9,8 @@ module VagrantPlugins
   # A guest plugin for Juniper's Junos network OS.
   # This communicates with the BSD shell of Junos,
   # which matches other Vagrant guest plugin behavior.
-  module Junos
-    lib_path = Pathname.new(File.expand_path('../vagrant-aws', __FILE__))
+  module GuestJunos
+    lib_path = Pathname.new(File.expand_path('../vagrant-junos', __FILE__))
     autoload :Action, lib_path.join('action')
     autoload :Errors, lib_path.join('errors')
   end
