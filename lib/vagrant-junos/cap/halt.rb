@@ -5,7 +5,7 @@ module VagrantPlugins
       class Halt
         def self.halt(machine)
           begin
-            machine.communicate.tap('shutdown now')
+            machine.communicate.execute('shutdown -p now')
           rescue IOError
           end
         end
