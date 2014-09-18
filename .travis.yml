@@ -8,6 +8,8 @@ rvm:
 before_install:
   - gem install bundler -v '1.5.3'
 
+script: bundle exec rake build
+
 notifications:
   email:
     on_success: never
