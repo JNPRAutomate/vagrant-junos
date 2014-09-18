@@ -14,7 +14,7 @@ module VagrantPlugins
             commands = <<-EOS
 configure
 set system root-password ssh-rsa "#{contents}"
-commit-and-quit
+commit and-quit
 EOS
             temp = Tempfile.new('vagrant')
             temp.binmode

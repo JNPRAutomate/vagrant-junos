@@ -12,7 +12,7 @@ module VagrantPlugins
               commands = <<-EOS
 configure
 set system host-name #{name}
-commit-and-quit
+commit and-quit
 EOS
               Tempfile.open('vagrant') do |temp|
                 temp.binmode
