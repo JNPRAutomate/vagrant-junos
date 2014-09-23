@@ -1,6 +1,6 @@
 # [Vagrant Junos Guest](https://github.com/JNPRAutomate/vagrant-junos)
 
-[![Build Status](https://travis-ci.org/JNPRAutomate/vagrant-junos.svg?branch=master)](https://travis-ci.org/JNPRAutomate/vagrant-junos)[![Gem Version](https://badge.fury.io/rb/vagrant-junos.svg)](http://badge.fury.io/rb/vagrant-junos)[![Dependency Status](https://gemnasium.com/JNPRAutomate/vagrant-junos.svg)](https://gemnasium.com/JNPRAutomate/vagrant-junos)
+[![Build Status](https://travis-ci.org/JNPRAutomate/vagrant-junos.svg?branch=master)](https://travis-ci.org/JNPRAutomate/vagrant-junos)[![Gem Version](https://badge.fury.io/rb/vagrant-junos.svg)](http://badge.fury.io/rb/vagrant-junos)[![Code Climate](https://codeclimate.com/github/JNPRAutomate/vagrant-junos/badges/gpa.svg)](https://codeclimate.com/github/JNPRAutomate/vagrant-junos)[![Dependency Status](https://gemnasium.com/JNPRAutomate/vagrant-junos.svg)](https://gemnasium.com/JNPRAutomate/vagrant-junos)
 
 
 
