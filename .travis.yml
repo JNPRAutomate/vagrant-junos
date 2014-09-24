@@ -6,7 +6,6 @@ rvm:
   - 2.1.3
 
 before_install:
-  - gem uninstall -a bundler
   - gem install bundler -v '1.6.6'
 
 script: bundle exec rake build
