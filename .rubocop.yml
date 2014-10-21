@@ -2,3 +2,5 @@ Style/FileName:
   Enabled: false
 Style/LineLength:
   Enabled: false
+Style/StringLiterals:
+  Enabled: false
