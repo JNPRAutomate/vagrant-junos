@@ -1,6 +1,8 @@
 require 'vagrant/util/shell_quote'
 require 'tempfile'
 
+require 'vagrant/util/template_renderer'
+
 module VagrantPlugins
   module GuestJunos
     module Cap
@@ -10,20 +12,25 @@ module VagrantPlugins
           contents = Vagrant::Util::Shellquote.escape(contents, "'")
           contents = contents.gsub("\n", "\\n")
 
+          # render public key junos conf template, based on Vagrantfile, and upload
+          public_key_module = TemplateRenderer.render('guests/junos/public_key', contents)
+          upload(machine, public_key_module, '/mfs/tmp/public_Key')
+
+          # set up us root's public key
           machine.communicate.tap do |comm|
-            commands = <<-EOS
-configure
-set system root-password ssh-rsa "#{contents}"
-commit and-quit
-EOS
-            temp = Tempfile.new('vagrant')
-            temp.binmode
-            temp.write(commands)
-            temp.close
-            comm.upload(temp.path '/mfs/tmp/set_root_key')
-            comm.execute('cli -f /mfs/tmp/set_root_key')
-            comm.execute('rm /mfs/tmp/set_root_key')
+            comm.execute('cli -f /mfs/tmp/public_key')
+            comm.execute('rm /mfs/tmp/public_key')
           end
+        end
+
+        # Upload a file.
+        def self.upload(machine, content, remote_temp)
+          local_temp = Tempfile.new('vagrant-upload')
+          local_temp.binmode
+          local_temp.write(content)
+          local_temp.close
+          machine.communicate.upload(local_temp.path, "#{remote_temp}")
+          local_temp.delete
         end
       end
     end

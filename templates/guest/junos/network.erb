@@ -1,0 +1,11 @@
+configure
+<%= network[:interface].each do |network| %>
+delete interfaces ge-0/0/<%= options[:interface] %>.0
+<%= if network[:type] == :static %>
+set interfaces ge-0/0/<%= options[:interface] %>.0 family inet address <%= options[:ip] %>/<%= options[:netmask] %>
+<%= end %>
+<%= if network[:type] == :dhcp %>
+set interfaces ge-0/0/<%= options[:interface] %>.0 family inet dhcp
+<%= end %>
+<%= end %>
+commit and-quit

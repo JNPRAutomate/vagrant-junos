@@ -9,4 +9,11 @@ group :plugins do
   gem 'vagrant-junos', path: '.'
 end
 
+group 'test' do
+  gem 'rake'
+  gem 'chefspec'
+  gem 'foodcritic'
+  gem 'rubocop'
+end
+
 gemspec
