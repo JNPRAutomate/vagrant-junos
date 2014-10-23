@@ -1,6 +1,6 @@
-require 'vagrant/util/shell_quote'
 require 'tempfile'
-
+require 'vagrant-junos/version'
+require 'vagrant/util/shell_quote'
 require 'vagrant/util/template_renderer'
 
 module VagrantPlugins
@@ -8,18 +8,22 @@ module VagrantPlugins
     module Cap
       # change root's public key
       class InsertPublicKey
+        include Vagrant::Util
+
         def self.insert_public_key(machine, contents)
           contents = Vagrant::Util::Shellquote.escape(contents, "'")
           contents = contents.gsub("\n", "\\n")
 
           # render public key junos conf template, based on Vagrantfile, and upload
-          public_key_module = TemplateRenderer.render('guests/junos/public_key', contents)
-          upload(machine, public_key_module, '/mfs/tmp/public_Key')
+          public_key_module = TemplateRenderer.render('guest/junos/public_key',
+                                                      contents,
+                                                      template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
+          upload(machine, public_key_module, '/mfs/tmp/set_public_Key')
 
           # set up us root's public key
           machine.communicate.tap do |comm|
-            comm.execute('cli -f /mfs/tmp/public_key')
-            comm.execute('rm /mfs/tmp/public_key')
+            comm.execute('cli -f /mfs/tmp/set_public_key')
+            comm.execute('rm /mfs/tmp/set_public_key')
           end
         end
 

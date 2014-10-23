@@ -1,5 +1,5 @@
 require 'tempfile'
-
+require 'vagrant-junos/version'
 require 'vagrant/util/template_renderer'
 
 module VagrantPlugins
@@ -14,8 +14,10 @@ module VagrantPlugins
             unless comm.test("hostname | grep '^#{name}$'")
 
               # render template, based on Vagrantfile, and upload
-              hostname_module = TemplateRenderer.render('guests/junos/hostname', name: name)
-              upload(machine, hostname_module, '/mfs/tmp/hostname')
+              hostname_module = TemplateRenderer.render('guest/junos/hostname',
+                                                        name: name,
+                                                        template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
+              upload(machine, hostname_module, '/mfs/tmp/set_hostname')
 
               # set up us the Junos interfaces
               comm.execute('cli -f /mfs/tmp/set_hostname')
@@ -23,6 +25,7 @@ module VagrantPlugins
             end
           end
         end
+
         # Upload a file.
         def self.upload(machine, content, remote_temp)
           local_temp = Tempfile.new('vagrant-upload')

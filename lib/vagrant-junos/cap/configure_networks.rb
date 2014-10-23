@@ -1,6 +1,6 @@
-require 'tempfile'
 require 'ipaddr'
-
+require 'tempfile'
+require 'vagrant-junos/version'
 require 'vagrant/util/template_renderer'
 
 module VagrantPlugins
@@ -8,6 +8,8 @@ module VagrantPlugins
     module Cap
       # Configure Junos network interfaces
       module ConfigureNetworks
+        include Vagrant::Util
+
         def self.configure_networks(machine, networks)
           # set the prefix length
           networks.each do |network|
@@ -15,14 +17,11 @@ module VagrantPlugins
           end
 
           # render template, based on Vagrantfile, and upload
-          network_module = TemplateRenderer.render('guests/junos/network', networks: networks)
+          network_module = TemplateRenderer.render('guest/junos/network',
+                                                   options: networks,
+                                                   template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
           upload(machine, network_module, '/mfs/tmp/network')
-
-          # set up us the Junos interfaces
-          machine.communicate.tap do |comm|
-            comm.execute('cli -f /mfs/tmp/network')
-            comm.execute('rm /mfs/tmp/network')
-          end
+          deploy(machine)
         end
 
         # Upload a file.
@@ -33,6 +32,14 @@ module VagrantPlugins
           local_temp.close
           machine.communicate.upload(local_temp.path, "#{remote_temp}")
           local_temp.delete
+        end
+
+        # set up us the Junos interfaces
+        def self.deploy(machine)
+          machine.communicate.tap do |comm|
+            comm.execute('cli -f /mfs/tmp/network')
+            # comm.execute('rm /mfs/tmp/network')
+          end
         end
 
         # convert vagrant dotted-decimal notation to cidr
