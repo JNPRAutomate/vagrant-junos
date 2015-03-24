@@ -6,8 +6,8 @@ end
 
 # This is a sanity check to make sure no one is attempting to install
 # this into an early Vagrant version.
-if Vagrant::VERSION < '1.6.0'
-  fail 'The vagrant-junos plugin is only compatible with Vagrant 1.6+'
+if Vagrant::VERSION < '1.7.0'
+  fail 'The vagrant-junos plugin is only compatible with Vagrant 1.7+'
 end
 
 module VagrantPlugins
@@ -43,6 +43,11 @@ module VagrantPlugins
       guest_capability('junos', 'insert_public_key') do
         require_relative 'cap/insert_public_key'
         Cap::InsertPublicKey
+      end
+
+      guest_capability('junos', 'remove_public_key') do
+        require_relative 'cap/remove_public_key'
+        Cap::RemovePublicKey
       end
     end
   end

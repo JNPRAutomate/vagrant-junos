@@ -11,8 +11,6 @@ end
 
 group 'test' do
   gem 'rake'
-  gem 'chefspec'
-  gem 'foodcritic'
   gem 'rubocop'
 end
 

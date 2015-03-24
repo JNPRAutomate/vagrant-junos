@@ -16,7 +16,7 @@ module VagrantPlugins
             network[:prefix_length] = (network[:netmask] && netmask_to_cidr(network[:netmask]))
           end
 
-          # render template, based on Vagrantfile, and upload
+          # render template based on Vagrantfile, and upload
           network_module = TemplateRenderer.render('guest/junos/network',
                                                    options: networks,
                                                    template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
@@ -38,7 +38,7 @@ module VagrantPlugins
         def self.deploy(machine)
           machine.communicate.tap do |comm|
             comm.execute('cli -f /mfs/tmp/network')
-            # comm.execute('rm /mfs/tmp/network')
+            comm.execute('rm /mfs/tmp/network')
           end
         end
 
