@@ -11,19 +11,18 @@ module VagrantPlugins
         include Vagrant::Util
 
         def self.insert_public_key(machine, contents)
-          contents = Vagrant::Util::Shellquote.escape(contents, "'")
+          contents = ShellQuote.escape(contents, "'")
           contents = contents.gsub("\n", "\\n")
 
           # render public key junos conf template, based on Vagrantfile, and upload
           public_key_module = TemplateRenderer.render('guest/junos/public_key',
-                                                      contents,
+                                                      contents: contents,
                                                       template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
-          upload(machine, public_key_module, '/mfs/tmp/set_public_Key')
+          upload(machine, public_key_module, '/mfs/tmp/set_public_key')
 
           # set up us root's public key
           machine.communicate.tap do |comm|
             comm.execute('cli -f /mfs/tmp/set_public_key')
-            comm.execute('rm /mfs/tmp/set_public_key')
           end
         end
 
