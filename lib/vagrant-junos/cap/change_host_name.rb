@@ -21,7 +21,6 @@ module VagrantPlugins
 
               # set up us the Junos interfaces
               comm.execute('cli -f /mfs/tmp/set_hostname')
-              comm.execute('rm /mfs/tmp/set_hostname')
             end
           end
         end

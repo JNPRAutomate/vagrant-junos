@@ -1,6 +1,10 @@
 configure
 wildcard range delete interfaces ge-0/0/[1-9]
 <% options.each do |options| -%>
-set interfaces ge-0/0/<%= options[:interface].to_i %> unit 0 family inet address <%= options[:ip] %>/<%= options[:prefix_length] %>
+  <% if options[:type].to_sym == :static -%>
+    set interfaces ge-0/0/<%= options[:interface].to_i %> unit 0 family inet address <%= options[:ip] %>/<%= options[:prefix_length] %>
+  <% elsif options[:type].to_sym == :dhcp -%>
+    set interfaces ge-0/0/<%= options[:interface].to_i %> unit 0 family inet dhcp
+  <% end -%>
 <% end -%>
 commit and-quit

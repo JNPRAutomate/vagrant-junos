@@ -13,19 +13,21 @@ This is a [Vagrant](http://www.vagrantup.com) 1.7+ plugin that adds a Junos gues
 * Detect [vSRX](http://www.juniper.net/us/en/products-services/security/srx-series/vsrx/) guest instances automatically, or via [Vagrantfile](https://docs.vagrantup.com/v2/vagrantfile/machine_settings.html).  The default boxes on [Juniper's Atlas site](http://atlas.hashicorp.com/Juniper) have `config.vm.guest` explicitly set to Junos.
 * Set the hostname via [Vagrantfile](https://docs.vagrantup.com/v2/vagrantfile/machine_settings.html) - `config.vm.hostname`
 * Support [Vagrantfile SSH settings](https://docs.vagrantup.com/v2/vagrantfile/ssh_settings.html) -  `config.ssh.private_key_path`, etc.
-* Network configuration of ge-0/0/1.0 through ge-0/0/9.0
+* Network configuration of ge-0/0/1.0 through ge-0/0/9.0 (dhcp or static)
 * __TBD__: anything you request via [issues](https://github.com/JNPRAutomate/vagrant-junos/issues)
 
 
 ## Usage
 
-Install using standard Vagrant 1.6+ plugin installation methods.  The fastest way to get started is to use the standard Vagrant Cloud images:
+Install using standard Vagrant 1.7+ plugin installation methods.  The fastest way to get started is to use the standard Vagrant Cloud images:
 
 ```
 $ vagrant plugin install vagrant-junos
 ...
-$ vagrant up juniper/ffp-12.1X46-D20.5
+... (create a Vagrant environment in a directory):
+$ vagrant init juniper/ffp-12.1X46-D20.5
 ...
+$ vagrant up
 ```
 
 ## Quick Start
@@ -66,4 +68,4 @@ $ bundle exec vagrant up juniper/ffp-12.1X46-D20.5
 
 ## Notes
 
-> **NOTE:** post-bootstrap configuration in Vagrant will be carried out through the [vagrant-netconf](https://github.com/JNPRAutomate/vagrant-netconf) communicator plugin and [vagrant-jprovision](https://github.com/JNPRAutomate/vagrant-jprovision) provisioner plugin.  These may or may not be required in the premade boxes in the future.
+Other than installing this plugin, the next recommended step is to check out the boxes at [Juniper's Atlas site](http://atlas.hashicorp.com/Juniper).

@@ -35,7 +35,6 @@ module VagrantPlugins
           machine.communicate.upload(local_temp.path, "#{remote_temp}")
           local_temp.delete
         end
-
       end
     end
   end

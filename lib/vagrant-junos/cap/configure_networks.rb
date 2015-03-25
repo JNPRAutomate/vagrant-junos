@@ -38,7 +38,6 @@ module VagrantPlugins
         def self.deploy(machine)
           machine.communicate.tap do |comm|
             comm.execute('cli -f /mfs/tmp/network')
-            comm.execute('rm /mfs/tmp/network')
           end
         end
 
