@@ -19,7 +19,7 @@ module VagrantPlugins
           # render template based on Vagrantfile, and upload
           network_module = TemplateRenderer.render('guest/junos/network',
                                                    options: networks,
-                                                   template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
+                                                   template_root: "#{VagrantPlugins::GuestJunos.source_root}/templates")
           upload(machine, network_module, '/mfs/tmp/network')
           deploy(machine)
         end

@@ -17,7 +17,7 @@ module VagrantPlugins
           # remove vagrant insecure public key (or anything called)
           public_key_module = TemplateRenderer.render('guest/junos/remove_public_key',
                                                       contents: contents,
-                                                      template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
+                                                      template_root: "#{VagrantPlugins::GuestJunos.source_root}/templates")
           upload(machine, public_key_module, '/mfs/tmp/delete_public_key')
 
           # delete a public key for root
