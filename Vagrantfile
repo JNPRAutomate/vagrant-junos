@@ -26,6 +26,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = 'vagrant-junos-test'
   config.vm.network "private_network",
                     ip: "192.168.33.10",
+                    netmask: "255.255.252.0",
                     virtualbox__intnet: "teststatic"
   config.vm.network "private_network",
                     type: "dhcp",
