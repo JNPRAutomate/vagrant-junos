@@ -16,7 +16,7 @@ module VagrantPlugins
               # render template, based on Vagrantfile, and upload
               hostname_module = TemplateRenderer.render('guest/junos/hostname',
                                                         name: name,
-                                                        template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
+                                                        template_root: "#{VagrantPlugins::GuestJunos.source_root}/templates")
               upload(machine, hostname_module, '/mfs/tmp/set_hostname')
 
               # set up us the Junos interfaces

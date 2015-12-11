@@ -17,7 +17,7 @@ module VagrantPlugins
           # render public key junos conf template, based on Vagrantfile, and upload
           public_key_module = TemplateRenderer.render('guest/junos/public_key',
                                                       contents: contents,
-                                                      template_root: "#{Dir.home}/.vagrant.d/gems/gems/vagrant-junos-#{VagrantPlugins::GuestJunos::VERSION}/templates")
+                                                      template_root: "#{VagrantPlugins::GuestJunos.source_root}/templates")
           upload(machine, public_key_module, '/mfs/tmp/set_public_key')
 
           # set up us root's public key
